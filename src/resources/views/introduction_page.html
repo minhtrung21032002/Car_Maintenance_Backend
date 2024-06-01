@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${blog_title} Introduction</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input,
+        label {
+            width: 100%;
+            display: block;
+        }
+
+        label {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 0.75rem;
+        }
+
+        input {
+            margin-top: 5px;
+            padding: 5px 10px;
+            width: 358px;
+            outline: none;
+        }
+
+        /* Navigation bar */
+        .page-navigation-bar {
+            height: 50px;
+            background-color: #e5e7eb;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumbs-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            max-width: 776px;
+
+        }
+
+        .breadcrumbs-container ol {
+            list-style: none;
+            margin: 0;
+        }
+
+        .breadcrumbs-container ol li {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .breadcrumbs-container ol li span {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        .breadcrumbs-container ol li i {
+            font-size: 10px;
+        }
+
+        .page-navigation-link {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .page-navigation-link a {
+            color: #4b5563;
+            line-height: 50px;
+        }
+
+        /* Main */
+        .floatLeft {
+            width: 700px;
+            float: left;
+        }
+
+        .floatRight {
+            width: 20%;
+        }
+
+        /* tab */
+        .tabWrap {
+            margin-bottom: 6px;
+        }
+
+        .tabs {
+            height: 35px;
+            margin: 24px 0 8px;
+            padding: 0;
+            list-style-type: none;
+            border-bottom: 1px solid #979797;
+        }
+
+        .tabs>li {
+            float: left;
+            position: relative;
+            display: inline-block;
+            height: 34px;
+            margin: 0 3px;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a.tab-link.active {
+            background-color: #fff;
+            border: 1px solid #979797;
+            border-bottom-color: #fff;
+            color: #212426;
+            font-weight: 700;
+        }
+
+        a.tab-link {
+            position: relative;
+            color: #212426;
+            display: block;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            border-radius: 2px 2px 0 0;
+            top: -1px;
+            border-width: 1px 1px 0;
+            padding: 7px 17px 8px;
+            background-color: #f9fafb;
+            line-height: 19px;
+        }
+
+        a.tab-link.disabled {
+            color: #e5e7eb;
+        }
+
+        a.nextLink:hover {
+            text-decoration: underline;
+        }
+
+        .arrow {
+            font-size: 1.2em;
+            font-weight: 400;
+            line-height: 1.388em;
+        }
+
+        /* Drop file */
+        #drop-area {
+            border: 2px dashed #ccc;
+            border-radius: 20px;
+            width: 480px;
+            font-family: sans-serif;
+            /* margin: 100px 0; */
+            padding: 20px;
+            transition: 0.5s all;
+        }
+
+        #drop-area.highlight {
+            border-color: purple;
+        }
+
+        #drop-area:hover {
+            background-color: #94ecb4;
+            border-color: #22c55e;
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        .my-form {
+            margin-bottom: 10px;
+        }
+
+        #gallery {
+            margin-top: 10px;
+        }
+
+        #gallery img {
+            width: 150px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .button {
+            width: initial;
+            display: inline-block;
+            padding: 10px;
+            background: #ccc;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .button:hover {
+            background: #ddd;
+        }
+
+        #fileElem {
+            display: none;
+        }
+
+        #draggable-list {
+            margin-top: 10px;
+            display: flex;
+            list-style-type: none;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 0;
+            width: 316px;
+        }
+
+        .draggable-item {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: move;
+            width: 56px;
+            height: 42px;
+        }
+
+        .draggable-item img {
+            height: 100%;
+        }
+
+        .sidebarFloat {
+            float: right;
+            margin-right: -20px;
+            padding-top: 71px;
+        }
+
+        .sidebarFloat .toggleBar {
+            display: flex;
+            justify-content: space-between;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="width: 1100px; margin: auto">
+        <div>
+            <div class="page-navigation-bar">
+                <div class="breadcrumbs-container page-navigation-link">
+                    <ol>
+                        <li>
+                            <a href="">Home</a>
+                            <span> <i class="fa-solid fa-greater-than" class="mx-2"></i></span>
+
+                        </li>
+                        <li>
+                            <a href="../../../../../guide" style="font-weight: 700;">Car and Truck</a>
+
+                        </li>
+                    </ol>
+                </div>
+                <div class="page-navigation-link" style="margin-left: auto;">
+                    <a href="#" id="blogLink">View
+                        <span style="display: inline-flex; margin-inline: 5px; padding-right: 10px;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="floatLeft">
+            <h2 class="guide-title">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderi</h2>
+            <div class="tabWrap">
+                <ul class="tabs">
+                    <li class="tab">
+                        <a href="/Guide/intro/37588" class="tab-link active" id="introductionTab"
+                            data-tab="introduction" data-url="">Introduction</a>
+                    </li>
+
+                    <li class="tab">
+                        <a href="./step-page.html" class="tab-link" id="guidestepsTab" data-tab="guidesteps"
+                            data-url="">Guide Steps</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div style="background-color: #f7f9faff; padding: 10px">
+                <label class="tip introTypePrompt" for="introThing"> Guide Title </label>
+                <input type="text" id="guideTitle" />
+
+                <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+                <p>Minutes: <span id="demo"></span></p>
+                <label class="tip" for="introTitle" style="margin-top: 15px"> Difficulty Estimate </label>
+                <select id="difficultySelect" class="form-select" aria-label="Default select example">
+                    <option value="Very Easy" selected>Very Easy</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Moderate">Moderate</option>
+                    <option value="Difficult">Difficult</option>
+                </select>
+
+                <label class="tip" for="introTitle" style="margin-top: 15px"> Blog Title </label>
+                <input type="text" name="intro[title]" id="introTitle" data-translate-field="title"
+                    data-translate-source="source-title" tabindex="5"
+                    class="js-translate-to twoThirdsWidth hasTip watchModified" value="Brake Pads Replacement" />
+
+                <label class="tip" for="introTitle" style="margin-top: 15px"> Guide Image </label>
+
+
+                <div id="drop-area" style="position: relative">
+                    <form class="my-form">
+                        <p>
+                            Upload multiple files
+                        </p>
+                        <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)" />
+                        <label class="button" for="fileElem"
+                            style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0">Select
+                            some files</label>
+                    </form>
+                    <progress id="progress-bar" max="100" value="0"></progress>
+                    <div id="gallery"></div>
+                </div>
+
+                <label for="introIntroduction" style="margin-top: 15px"> Introduction </label>
+                <form method="post" style="width: 100%">
+                    <textarea id="mytextarea" style="width: 100%; min-height: 120px">Hello, World!</textarea>
+                </form>
+
+                <label for="introIntroduction" style="margin-top: 15px"> Conclusion </label>
+                <form method="post" style="width: 100%">
+                    <textarea id="mytextarea2" style="width: 100%; min-height: 120px">Hello, World!</textarea>
+                </form>
+
+                <div class="guide-action-buttons" style="width: 100%; margin-top: 15px; margin-bottom: 25px">
+                    <button type="submit" name="save" tabindex="8" class="button button-medium button-action-solid"
+                        id="save" style="
+                                display: block;
+                                margin-left: auto;
+                                margin-right: 0;
+                                background-color: #3b82f6;
+                                border-color: #3b82f6;
+                                color: #fff;
+                            ">
+                        Save
+                    </button>
+                </div>
+
+                <div class="pagination paginationBottom"
+                    style="display: table; width: 100%; background-color: #f9fafb; padding: 4px 8px">
+                    <p class="left" style="display: table-cell; width: auto; min-width: 75px; text-align: star"></p>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebarFloat" style="float: right">
+            <div style="
+                        margin-top: 24px;
+                        border: 1px solid rgb(192, 192, 196);
+                        padding: 10px;
+                        background-color: #f7f9faff;
+                    ">
+                <h3 class="toggleBar" style="font-size: 15px">Steps</h3>
+                <div id="draggable-list" style="max-width: 297px">
+                    <div class="draggable-item" data-id="item1">Item 1</div>
+                    <div class="draggable-item" data-id="item2">Item 2</div>
+                    <div class="draggable-item" data-id="item3">Item 3</div>
+                    <div class="draggable-item" data-id="item4">Item 3</div>
+                    <div class="draggable-item" data-id="item5">Item 3</div>
+                </div>
+
+                <div class="newGuideBanner">
+                    <h2 class="name">Create a New Guide</h2>
+                    <img id="teardownImg" src="https://assets.cdn.ifixit.com/static/images/create-guide-ifixit.jpg"
+                        alt="Contribute Image" style="width: 286px; margin-top: 8px;">
+                    <p style="margin: 8px 0;">
+                        <strong>Create a repair guide!</strong><br>
+                        Help the world by sharing your repair knowledge.
+                    </p>
+                    <p style="margin: 8px 0;">
+                        Need some coaching? Visit our wiki:<br>
+                        <a href="/Info/Repair_Guide">
+                            Creating a Repair Guide </a>
+                    </p>
+                    <p style="margin: 8px 0;">
+                        Participate in other ways:<br>
+                        <a href="/Participate">
+                            Ways to Participate </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+
+
+
+
+    </script>
+
+    <script>
+        // ************************ Drag and drop ***************** //
+        let dropArea = document.getElementById('drop-area');
+
+        // Prevent default drag behaviors
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
+        });
+
+        // Highlight drop area when item is dragged over it
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        // Handle dropped files
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function highlight(e) {
+            dropArea.classList.add('highlight');
+        }
+
+        function unhighlight(e) {
+            dropArea.classList.remove('active');
+        }
+
+        function handleDrop(e) {
+            var dt = e.dataTransfer;
+            var files = dt.files;
+
+            handleFiles(files);
+        }
+
+        let uploadProgress = [];
+        let progressBar = document.getElementById('progress-bar');
+
+        function initializeProgress(numFiles) {
+            progressBar.value = 0;
+            uploadProgress = [];
+
+            for (let i = numFiles; i > 0; i--) {
+                uploadProgress.push(0);
+            }
+        }
+
+        function updateProgress(fileNumber, percent) {
+            uploadProgress[fileNumber] = percent;
+            let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length;
+            progressBar.value = total;
+        }
+
+        function handleFiles(files) {
+            files = [...files];
+            initializeProgress(files.length);
+            // files.forEach(uploadFile);
+            files.forEach(previewFile);
+        }
+
+        function previewFile(file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = function () {
+                let img = document.createElement('img');
+                img.src = reader.result;
+                document.getElementById('gallery').appendChild(img);
+            };
+        }
+
+        // function uploadFile(file, i) {
+        //     var url = 'https://api.cloudinary.com/v1_1/joezimim007/image/upload';
+        //     var xhr = new XMLHttpRequest();
+        //     var formData = new FormData();
+        //     xhr.open('POST', url, true);
+        //     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+        //     // Update progress (can be used to show progress indicator)
+        //     xhr.upload.addEventListener('progress', function (e) {
+        //         updateProgress(i, (e.loaded * 100.0) / e.total || 100);
+        //     });
+
+        //     xhr.addEventListener('readystatechange', function (e) {
+        //         if (xhr.readyState == 4 && xhr.status == 200) {
+        //             updateProgress(i, 100); // <- Add this
+        //         } else if (xhr.readyState == 4 && xhr.status != 200) {
+        //             // Error. Inform the user
+        //         }
+        //     });
+
+        //     formData.append('upload_preset', 'ujpu6gyk');
+        //     formData.append('file', file);
+        //     xhr.send(formData);
+        // }
+    </script>
+
+    <script src="/controllers/introduction.js" type="module"></script>
+
+    <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        }
+    </script>
+</body>
+
+</html>

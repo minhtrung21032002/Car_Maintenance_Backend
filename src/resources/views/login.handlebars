@@ -1,0 +1,116 @@
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Include Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet"/>
+
+  <!-- Bootstrap 5 JS (Popper.js and Bootstrap.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="container py-5 h-100" style="background-color: white;">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+            
+                <!-- Email input -->
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label" >Email address</label>
+                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+           
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label" >Password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" id ="loginError" style="display: none" >
+            
+                </div>
+
+                <div class="d-flex justify-content-around align-items-center mb-4">
+                    <!-- Checkbox -->
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="set" id="rememberMe" checked />
+                    <label class="form-check-label" for="form1Example3"> Remember me </label>
+                    </div>
+                     <a href="#" id="forgotPasswordLink">Forgot Password?</a>
+                </div>
+
+                <!-- Submit button -->
+                <button  class="btn btn-primary btn-lg btn-block" id ="submit">Sign in</button>
+
+                <div class="divider d-flex align-items-center my-4">
+                    <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                </div>
+
+                <a class="btn btn-primary btn-lg btn-block" style="background-color: #dd4b39" href="#!"
+                    role="button" id ="submit_google">
+                    <i class="fab fa-google me-2"></i>Continue with Gmail
+                </a>
+          
+
+                
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Forgot Password?</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+
+        </div>
+        <div class="modal-body">
+          <!-- Your forgot password form -->
+         <form id="forgotPasswordForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="resetEmail" class="form-control" name="email" placeholder="Enter Your Email" required="">
+            </div>
+            <div class="mb-3 d-grid">
+                <button type="submit" class="btn btn-primary">Reset Password</button>
+            </div>
+            <span>Don't have an account? <a href="/auth/normal/register">Sign Up</a></span>
+        </form>
+         <div id="resetPasswordSuccessMessage" class="alert alert-success alert-dismissible fade show" style="display: none">
+            <strong> Password reset email sent successfully.</strong> <br>Check your inbox.
+          
+        </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+     
+
+  
+</section>
+
+<script>
+    $(document).ready(function () {
+      $('#forgotPasswordLink').click(function () {
+        $('#exampleModal').modal('show');
+      });
+    });
+  </script>
+
+  <!-- Bootstrap 5 JS (Popper.js and Bootstrap.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/firebase_client/client_login.js" type ="module"></script>
+

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Step {%BLOGTITLE%}</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .clearer {
+            clear: both;
+        }
+
+        .container {
+            max-width: 1199px;
+            margin: auto;
+        }
+
+        /* Navigation bar */
+        .page-navigation-bar {
+            height: 50px;
+            background-color: #e5e7eb;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breadcrumbs-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding-left: 16px;
+            max-width: 776px;
+
+        }
+
+        .breadcrumbs-container ol {
+            list-style: none;
+            margin: 0;
+        }
+
+        .breadcrumbs-container ol li {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .breadcrumbs-container ol li span {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        .breadcrumbs-container ol li i {
+            font-size: 10px;
+        }
+
+        .page-navigation-link {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .page-navigation-link a {
+            color: #4b5563;
+            line-height: 50px;
+        }
+
+        /* tab */
+        .tabWrap {
+            margin-bottom: 6px;
+        }
+
+        .tabs {
+            height: 35px;
+            margin: 24px 0 8px;
+            padding: 0;
+            list-style-type: none;
+            border-bottom: 1px solid #979797;
+        }
+
+        .tabs>li {
+            position: relative;
+            display: inline-block;
+            height: 34px;
+            margin: 0 3px;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a.tab-link.active {
+            background-color: #fff;
+            border: 1px solid #979797;
+            border-bottom-color: #fff;
+            color: #212426;
+            font-weight: 700;
+        }
+
+        a.tab-link {
+            position: relative;
+            color: #212426;
+            display: block;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            border-radius: 2px 2px 0 0;
+            top: -1px;
+            border-width: 1px 1px 0;
+            padding: 7px 17px 8px;
+            background-color: #f9fafb;
+            line-height: 19px;
+        }
+
+        /* STEP TITLE */
+        .step-title-prefix {
+            float: left;
+            margin-right: 5px;
+        }
+
+        .step-title {
+            font-size: 22px;
+            color: #212426;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+        }
+
+        /* Guide step actions */
+        #guideStepActions {
+            padding: 15px 0;
+        }
+
+        #guideStepActions .button {
+            margin-top: -8px;
+        }
+
+        a.button.button-delete {
+            color: #ef4444;
+            border: 1px solid;
+            border-color: #fde3e3;
+            padding: 6px 12px 7px;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 4px;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.1s, background-color 0.1s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        #insertStep {
+            float: right;
+            border: 1px solid;
+            padding: 6px 12px 7px;
+            margin-left: 8px;
+            border-radius: 4px;
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            color: #212426;
+            font-size: 14px;
+            text-align: center;
+            transition: border-color 0.1s, background-color 0.1s;
+        }
+
+        a.button.button-delete:hover {
+            background-color: #fef6f6;
+            border-color: #fbd0d0;
+        }
+
+        #insertStep:hover {
+            background-color: #e5e7eb;
+            background-image: none;
+        }
+
+        /* Pagination */
+        .pagination {
+            width: 100%;
+            margin: 8px 0;
+            border-radius: 4px;
+            padding: 4px 8px;
+            background-color: #f9fafb;
+            line-height: 2em;
+            text-align: center;
+            display: table;
+        }
+
+        .pagination a {
+            color: #4b5563;
+            font-weight: 700;
+        }
+
+        .pagination .left {
+            text-align: start;
+        }
+
+        .pagination .middle,
+        .pagination .right {
+            margin: 0;
+            display: table-cell;
+            float: none !important;
+            width: auto;
+            min-width: 75px;
+        }
+
+        .pagination .right {
+            margin: 0;
+            display: table-cell;
+            float: none !important;
+            width: auto;
+            min-width: 75px;
+            text-align: right;
+        }
+
+        #draggable-list {
+            margin-top: 10px;
+            display: flex;
+            list-style-type: none;
+            flex-wrap: wrap;
+            gap: 3px;
+            padding: 0;
+        }
+
+        .draggable-item {
+            cursor: move;
+            overflow: hidden;
+            width: 56px;
+            height: 42px;
+            background-size: 52px 52px;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .sidebarFloat {
+            float: right;
+            margin-right: -20px;
+            padding-top: 33px
+        }
+
+        .sidebarFloat .toggleBar {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Editor */
+        .line {
+            position: relative;
+        }
+
+        .line .bullet {
+            position: absolute;
+            top: 5px;
+            left: -20px;
+            font-size: 10px;
+            width: 12px;
+            height: 12px;
+            line-height: 12px;
+            font-size: 12px;
+
+        }
+
+        .line .bullet.bullet_black {
+            color: #4b5563;
+        }
+
+        .line .bullet.bullet_caution {
+            color: #ed1c24;
+            font-size: 15px;
+        }
+
+        .line .bullet.bullet_note {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .line .bullet.bullet_reminder {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .bullets-panel {
+            position: absolute;
+            z-index: 900;
+            width: 280px;
+            border-radius: 4px;
+            box-shadow: 0 16px 36px rgba(16, 22, 26, .2), 0 3px 10px rgba(16, 22, 26, .2);
+            padding-bottom: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            display: none;
+            margin-left: -30px;
+        }
+
+        .bullets-panel.active {
+            display: block;
+            top: -2px;
+            left: -285px;
+        }
+
+        .bullets-panel .bullet {
+            position: static;
+            font-size: 12px;
+        }
+
+        .bullets-panel h2 {
+            position: relative;
+            font-size: 20px;
+            height: 50px;
+            text-transform: capitalize;
+            border-top: 1px solid #f9fafb;
+            line-height: 50px;
+            clear: both;
+            width: 100%;
+        }
+
+        .bullets-panel h2 .bullet {
+            position: absolute;
+            top: 22px;
+            margin-left: 260px;
+            font-size: 12px;
+        }
+
+        .p-inline {
+            margin-top: 10px;
+        }
+
+        button {
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #addBtn {
+            display: block;
+            margin-left: auto;
+            padding: 5px 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        #addBtn:hover {
+            background-color: #4b5563;
+            color: white;
+        }
+
+        #saveBtn {
+            display: block;
+            margin: 0;
+            margin-left: auto;
+            padding: 5px 10px;
+            background-color: green;
+            border-radius: 2px;
+            border: none;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Image container */
+        .image-container {
+            position: relative;
+            border: 1px solid #ddd;
+            padding: 7px;
+            margin-bottom: 10px;
+            width: 96px;
+            height: 72px;
+        }
+
+        .image-container#bigStepImage {
+            width: 300px;
+            height: 225px;
+        }
+
+        .image-container .icon {
+            position: absolute;
+            display: grid;
+            place-items: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            font-size: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .image-container:hover {
+            background-color: #95edb6ff;
+        }
+
+        .image-container:hover .icon {
+            color: #7bc797ff;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .image-wrapper img {
+            /* display: block;   */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .input-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="width: 1000px">
+        <div>
+            <div class="page-navigation-bar">
+                <div class="breadcrumbs-container page-navigation-link">
+                    <ol>
+                        <li>
+                            <a href="">Home</a>
+                            <span> <i class="fa-solid fa-greater-than" class="mx-2"></i></span>
+
+                        </li>
+                        <li>
+                            <a href="../../../../../guide" style="font-weight: 700;" id="guideId">Car and Truck</a>
+
+                        </li>
+                    </ol>
+                </div>
+                <div class="page-navigation-link" style="margin-left: auto;">
+                    <a href="#" id="blogLink">View
+                        <span style="display: inline-flex; margin-inline: 5px; padding-right: 10px;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="history-heading" style="margin-top: 20px">
+            Install LED Pod Lights on a Off-Road Truck Jeeptall
+        </h2>
+        <div class="contentFLoat" style="float: left; width: 640px">
+            <div class="tabWrap">
+                <ul class="tabs">
+                    <li class="tab">
+                        <a href="./introduction-page.html" class="tab-link" id="introductionTab" data-tab="introduction"
+                            data-url="">Introduction</a>
+                    </li>
+
+                    <li class="tab">
+                        <a href="/Guide/edit/37588/86292" class="tab-link active" id="guidestepsTab"
+                            data-tab="guidesteps" data-url="">Guide Steps</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <div class="step-title-prefix">
+                    <span class="step-title">Editing Step 1</span>
+                </div>
+                <!-- <div class="step-title-editor">
+                    <span class="step-title muted">
+                        <a class="edit-title-link">
+                            <span title="" class="stepTitleValue">Add a title</span>
+                        </a></span>
+
+                    <div id="editStepTitle" style="display: none">
+                        <input id="editStepTitleInput" maxlength="125" value="" />
+                    </div>
+                </div> -->
+                <div class="clearer"></div>
+            </div>
+
+            <div class="container" style="width: 302px; float: left">
+                <div class="row">
+                    <div class="col-12 image-container" id="bigStepImage">
+                        <div class="image-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 image-container">
+                        <div class="image-wrapper thumb-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
+                    <div class="col-4 image-container">
+                        <div class="image-wrapper thumb-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
+                    <div class="col-4 image-container">
+                        <div class="image-wrapper thumb-wrapper"></div>
+                        <div class="icon"><i class="fa-solid fa-camera"></i></div>
+                        <input type="file" accept="image/jpeg, image/png, image/jpg" class="input-image" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; width: 45%; float: right">
+                <div class="editContent" id="myEditor"></div>
+
+                <div class="actionsContainer mb-3">
+                    <button class="btn btn-success" id="addBtn">Add <i class="fa-solid fa-plus"></i></button>
+                </div>
+
+                <div class="actionButtons">
+                    <button class="btn btn-primary" id="saveBtn">Save</button>
+                </div>
+            </div>
+
+            <div style="clear: both"></div>
+
+            <div id="guideStepActions" style="margin-top: 20px">
+                <a class="button button-medium button-delete" id="deleteStep">
+                    <!-- href="/Guide/edit/37588/86292/del" -->
+                    <i class="fa-solid fa-trash-can" style="margin-right: 5px"></i>Delete Step
+                </a>
+                <a id="insertStep" class="button button-medium" href="/Guide/edit/37588/new-after/1">
+                    <i class="fa fa-plus"></i>Insert Step
+                </a>
+            </div>
+
+            <div class="pagination">
+                <p class="left">
+                    
+                </p>
+
+                <p class="middle">&nbsp;</p>
+
+                <p class="right">
+                    
+                </p>
+            </div>
+        </div>
+
+        <div class="sidebarFloat" style="float: right">
+            <div style="
+                        margin-top: 24px;
+                        border: 1px solid rgb(192, 192, 196);
+                        padding: 10px 5px;
+                        background-color: #f7f9faff;
+                    ">
+                <h3 class="toggleBar" style="font-size: 15px">
+                    Steps
+                    <span>
+                        <a href="#reorderSteps" class="rearrange-steps-button"
+                            style="color: #4b5563; text-decoration: none">
+                            <i class="fa fa-retweet rearrangeBtn"></i> Rearrange
+                        </a>
+                        <div style="display: none" id="saveCancelButtons">
+                            <span id="saveStepsButton">Save</span> or <span id="cancelStepsButton">Cancel</span>
+                        </div>
+                    </span>
+                </h3>
+                <div id="draggable-list" style="width: 316px; padding-left: 8px;">
+                    <div class="draggable-item" data-id="item1">Item 1</div>
+                    <div class="draggable-item" data-id="item2">Item 2</div>
+                    <div class="draggable-item" data-id="item3">Item 3</div>
+                    <div class="draggable-item" data-id="item4">Item 3</div>
+                    <div class="draggable-item" data-id="item5">Item 3</div>
+                    <!-- Add more items as needed -->
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>This is a modal. You clicked on the first div with the class "line".</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script src="https://cdn.tiny.cloud/1/5i2a6eqgercd4hru4dqbpog93wsr5atvlq0nv3l4eti0fp4z/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+
+
+    <script src="/controllers/step.js" type="module"></script>
+    <script>
+        function newStepId(clickedStepId, blogId) {
+            const currentUrl = window.location.href;
+
+            // Split the URL by "/"
+            const parts = currentUrl.split("/");
+            const new_after = parts[parts.length - 2];
+            const currentBlogId = parts[parts.length - 3];
+            const currentStepId = parts[parts.length - 2];
+
+            // Construct the new URL with the new blogId and stepId
+            let newUrl = `${parts.slice(0, -2).join("/")}/${blogId}/${clickedStepId}`;
+            if(new_after === "new-after"){
+                newUrl = `${parts.slice(0, -2).join("/")}/${clickedStepId}`
+            }
+        
+            history.pushState({}, '', newUrl);
+            location.reload();
+        }
+    </script>
+    <script>
+        // // Editor START
+        // function newTextEditor(targetElement) {
+        //     const editor = tinymce.init({
+        //         target: targetElement,
+        //         inline: true,
+        //         menubar: false,
+        //         toolbar: 'undo redo bold italic underline',
+        //         min_height: 100,
+        //         resize: true,
+        //         plugins: 'autoresize',
+        //         statusbar: false,
+        //     });
+        // }
+
+        // document.getElementById('addBtn').addEventListener('click', () => {
+        //     const lineDiv = document.createElement('div');
+        //     lineDiv.classList.add('line');
+
+        //     const paragraph = document.createElement('div');
+        //     paragraph.classList.add('p-inline');
+        //     paragraph.innerHTML = 'Your wisdom here';
+
+        //     lineDiv.insertAdjacentHTML('afterbegin', '<div class="icon fa fa-circle bullet bullet_black"></div>');
+        //     lineDiv.appendChild(paragraph);
+
+
+        //     document.getElementById('myEditor').appendChild(lineDiv);
+        //     if (!paragraph) {
+        //         return;
+        //     }
+        //     newTextEditor(paragraph);
+        // });
+        // // Editor End
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Include Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet"/>
+
+  <!-- Bootstrap 5 JS (Popper.js and Bootstrap.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="container py-5 h-100" style="background-color: white;">
+            <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://png.pngtree.com/png-clipart/20230409/original/pngtree-admin-and-customer-service-job-vacancies-png-image_9041264.png"
+                class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                 <h3 class="fw-bold">Admin Login</h3>
+                <!-- Email input -->
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label" >Username</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="emailHelp">
+           
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label" >Password</label>
+                    <input type="password" class="form-control" id="password">
+                </div>
+                <div class="alert alert-danger alert-dismissible fade show" id ="loginError" style="display: none" >
+                     Please enter a correct email and password.
+                </div>
+
+               
+                <!-- Submit button -->
+                <button  class="btn btn-primary btn-lg btn-block" id ="submit">Sign in</button>
+
+        
+
+            </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+     
+  
+</section>
+
+ 
+</form>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const submitButton = document.getElementById('submit');
+    submitButton.addEventListener('click', function () {
+        const userNameInput = document.getElementById('username').value;  // Fetches value when clicked
+        const passwordInput = document.getElementById('password').value;  // Fetches value when clicked
+        sendTokenToServer(userNameInput, passwordInput);
+    });
+});
+
+
+    function sendTokenToServer(username,password) {
+        console.log(username)
+        console.log(password)
+        const serverEndpoint = `http://localhost:3000/auth/login/admin`;
+        console.log(serverEndpoint)
+        // Make an HTTP POST request to the server
+        fetch(serverEndpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: username, password: password }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+        
+            return response.json(); // Assuming the server sends a JSON response
+        })
+        .then(data => {
+            // Handle the server's response
+            if (data.status === 'success') {
+                // Redirect to another page
+                window.location.href = '/admin/users';
+            } else {
+                // Display an error message
+                alert('Server error: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error sending ID token to server:', error.message);
+            // Display an error message
+            alert('Error sending ID token to server');
+        });
+    }
+</script>
